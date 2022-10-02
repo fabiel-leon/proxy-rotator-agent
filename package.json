@@ -1,0 +1,26 @@
+{
+  "author": "Fabiel Leon <fabiel.leon.oliva@gmail.com>",
+  "name": "proxy-rotator",
+  "license": "Apache-2.0",
+  "description": "HTTP proxy rotator tunneling agent",
+  "version": "0.6.1",
+  "repository": {
+    "url": "https://github.com/fabiel-leon/proxy-rotator-agent"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "tunnel-agent": "^0.6.0"
+  },
+  "devDependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.3",
+    "jest": "^29.1.2",
+    "request": "^2.88.2"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
