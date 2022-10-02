@@ -1,12 +1,11 @@
-# tunnel-agent
+# proxy-rotator-agent
 
-HTTP proxy rotator tunneling agent
+This agent rotates requests trought especified proxies
 
-## for axios
-
-```js
-
-```
+If 2 proxies are specified
+First request goes trought first proxy
+Second request goes trought seconde proxy
+Third request goes trought first proxy
 
 ## for mikeal/request
 
@@ -73,4 +72,10 @@ null {
   asn: 'AS46562',
   asn_org: 'PERFORMIVE'
 }
+```
+
+## for axios
+
+```js
+
 ```
