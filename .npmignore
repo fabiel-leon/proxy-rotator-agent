@@ -1,0 +1,4 @@
+.devcontainer
+node_modules
+.env
+__tests__

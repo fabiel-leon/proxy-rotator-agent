@@ -10,6 +10,7 @@ Third request goes trought first proxy
 ## for mikeal/request
 
 ```js
+const request = require('request');
 const ProxyRotator = require('proxy-rotator-agent')
 
 const agent = new ProxyRotator({
