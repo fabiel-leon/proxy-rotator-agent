@@ -15,17 +15,18 @@ const ProxyRotator = require('proxy-rotator-agent')
 
 const agent = new ProxyRotator({
    proxies: [
-     { host: 'proxy1.com', port: 3128, proxyAuth: 'pass', headers: { 'user-agent': 'nautilus' }},
-     { host: 'proxy2.com', port: 4545, proxyAuth: 'proxy2pass', headers: { 'user-agent': 'firefox' }}
+     { host: '10.0.0.1', port: 3128, proxyAuth: 'pass', headers: { 'user-agent': 'nautilus' }},
+     { host: '10.0.0.2', port: 4545, proxyAuth: 'proxy2pass', headers: { 'user-agent': 'firefox' }}
    ]
 })
 
 function optionalCallback(err, httpResponse, body) {
+    if(err) return console.error(err);
     console.log(err, body);
 }
 
 request({
-  uri: 'https://ifconfig.net',
+  uri: 'https://httpbin.org/ip',
   json: true,
   agent,
   }, 
@@ -33,7 +34,7 @@ request({
 )
 
 request({
-  uri: 'https://ifconfig.net',
+  uri: 'https://httpbin.org/ip',
   json: true,
   agent,
   }, 
@@ -41,37 +42,62 @@ request({
 )
 ```
 
-```bash
-output: 
-null {
-      ip: '78.128.127.86',
-      ip_decimal: 1317044054,
-      country: 'Bulgaria',
-      country_iso: 'BG',
-      country_eu: true,
-      latitude: 42.696,
-      longitude: 23.332,
-      time_zone: 'Europe/Sofia',
-      asn: 'AS203380',
-      asn_org: 'DA International Group Ltd.'
-    }
+Output
 
-null {
-  ip: '154.6.90.11',
-  ip_decimal: 2584107531,
-  country: 'United States',
-  country_iso: 'US',
-  country_eu: false,
-  region_name: 'New Mexico',
-  region_code: 'NM',
-  metro_code: 790,
-  zip_code: '87198',
-  city: 'Albuquerque',
-  latitude: 35.0781,
-  longitude: -106.6583,
-  time_zone: 'America/Denver',
-  asn: 'AS46562',
-  asn_org: 'PERFORMIVE'
+```js
+{
+  ip: '10.0.0.1'
+}
+{
+  ip: '10.0.0.2'
+}
+```
+
+## for native https request
+
+```js
+const https = require('https');
+const ProxyRotator = require('proxy-rotator-agent')
+
+const agent = new ProxyRotator({
+   proxies: [
+     { host: '10.0.0.1', port: 3128, proxyAuth: 'pass', headers: { 'user-agent': 'nautilus' }},
+     { host: '10.0.0.2', port: 4545, proxyAuth: 'proxy2pass', headers: { 'user-agent': 'firefox' }}
+   ]
+})
+const options = {
+    hostname: 'httpbin.org',
+    port: 443,
+    path: '/ip',
+    agent,
+
+};
+// Make a request
+function request(options) {
+    const req = https.request(options);
+    req.on('response', (res) => {
+        res.on('data', (data) => {
+            console.log(data.toString())
+        });
+    });
+    req.on('error', (err) => {
+        console.error(err);
+    });
+    req.end();
+}
+
+request(options)
+request(options)
+```
+
+Output:
+
+```bash
+{
+  "origin": "10.0.0.1"
+}
+{
+  "origin": "10.0.0.2"
 }
 ```
 
