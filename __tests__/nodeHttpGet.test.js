@@ -1,5 +1,4 @@
 require('dotenv').config();
-const request = require("request");
 const agent = require('./proxyRotatorAgentInstance')
 const https = require('https')
 
@@ -34,18 +33,4 @@ describe('node:http get', () => {
         request(options)
         request(options, done)
     }, 10000);
-    it('should 2', () => {
-        https.get({ agent, href: 'https://encrypted.google.com/' }, (res) => {
-            console.log('statusCode:', res.statusCode);
-            console.log('headers:', res.headers);
-
-            res.on('data', (d) => {
-                console.log
-                process.stdout.write(d);
-            });
-
-        }).on('error', (e) => {
-            console.error(e);
-        });
-    });
 });

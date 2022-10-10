@@ -15,8 +15,8 @@ const ProxyRotator = require('proxy-rotator-agent')
 
 const agent = new ProxyRotator({
    proxies: [
-     { host: '10.0.0.1', port: 3128, proxyAuth: 'pass', headers: { 'user-agent': 'nautilus' }},
-     { host: '10.0.0.2', port: 4545, proxyAuth: 'proxy2pass', headers: { 'user-agent': 'firefox' }}
+     { proxy: { host: '10.0.0.1', port: 3128, proxyAuth: 'pass', headers: { 'user-agent': 'nautilus' }}},
+     { proxy: { host: '10.0.0.2', port: 4545, proxyAuth: 'proxy2pass', headers: { 'user-agent': 'firefox' }}}
    ]
 })
 
@@ -25,19 +25,19 @@ function optionalCallback(err, httpResponse, body) {
     console.log(err, body);
 }
 
-request({
+const options = {
   uri: 'https://httpbin.org/ip',
   json: true,
   agent,
-  }, 
+};
+
+request(
+  options, 
   optionalCallback
 )
 
-request({
-  uri: 'https://httpbin.org/ip',
-  json: true,
-  agent,
-  }, 
+request(
+  options,
   optionalCallback
 )
 ```
@@ -61,8 +61,8 @@ const ProxyRotator = require('proxy-rotator-agent')
 
 const agent = new ProxyRotator({
    proxies: [
-     { host: '10.0.0.1', port: 3128, proxyAuth: 'pass', headers: { 'user-agent': 'nautilus' }},
-     { host: '10.0.0.2', port: 4545, proxyAuth: 'proxy2pass', headers: { 'user-agent': 'firefox' }}
+     { proxy: { host: '10.0.0.1', port: 3128, proxyAuth: 'pass', headers: { 'user-agent': 'nautilus' }}},
+     { proxy: { host: '10.0.0.2', port: 4545, proxyAuth: 'proxy2pass', headers: { 'user-agent': 'firefox' }}}
    ]
 })
 const options = {
@@ -70,7 +70,6 @@ const options = {
     port: 443,
     path: '/ip',
     agent,
-
 };
 // Make a request
 function request(options) {
