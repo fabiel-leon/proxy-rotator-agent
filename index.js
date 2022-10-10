@@ -25,7 +25,7 @@ class ProxyRotatorAgent extends EventEmitter {
     let tunnelAgentInstance = self.tunnelAgentsMap.get(proxyOptions)
     if (!tunnelAgentInstance) {
       // console.log(options)
-      var uriProtocol = (options.uri?.protocol || options._defaultAgent?.protocol === 'https:' ? 'https' : 'http')
+      var uriProtocol = (options.protocol || options.uri?.protocol || options._defaultAgent?.protocol === 'https:' ? 'https' : 'http')
       var proxyProtocol = (proxyOptions.proxy.protocol === 'https:' ? 'Https' : 'Http')
       const key = `${uriProtocol}Over${proxyProtocol}`
       // console.log(key, uriProtocol, proxyProtocol, proxyOptions)
