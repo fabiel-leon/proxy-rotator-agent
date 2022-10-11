@@ -25,8 +25,9 @@ class ProxyRotatorAgent extends EventEmitter {
     let tunnelAgentInstance = self.tunnelAgentsMap.get(proxyOptions)
     if (!tunnelAgentInstance) {
       // console.log(options)
-      var uriProtocol = (options.protocol || options.uri?.protocol || options._defaultAgent?.protocol === 'https:' ? 'https' : 'http')
-      var proxyProtocol = (proxyOptions.proxy.protocol === 'https:' ? 'Https' : 'Http')
+      const reqProtocol = options.protocol || options.uri?.protocol || options._defaultAgent?.protocol;
+      const uriProtocol = (reqProtocol === 'https:' ? 'https' : 'http')
+      const proxyProtocol = (proxyOptions.proxy.protocol === 'https:' ? 'Https' : 'Http')
       const key = `${uriProtocol}Over${proxyProtocol}`
       // console.log(key, uriProtocol, proxyProtocol, proxyOptions)
       tunnelAgentInstance = tunnelAgent[key](proxyOptions);
@@ -41,6 +42,8 @@ class ProxyRotatorAgent extends EventEmitter {
     console.log('remove socket', arguments);
   }
 }
+
+ProxyRotatorAgent.defaultPort = 443;
 
 module.exports = ProxyRotatorAgent;
 

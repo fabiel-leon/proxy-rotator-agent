@@ -52,23 +52,21 @@ describe('node:http get', () => {
             protocol: 'https:',
             slashes: true,
             auth: null,
-            host: 'api.hitbtc.com',
+            host: 'api.binance.com',
             port: null,
-            hostname: 'api.hitbtc.com',
+            hostname: 'api.binance.com',
             hash: null,
-            search: null,
-            query: null,
-            pathname: '/api/2/public/currency',
-            path: '/api/2/public/currency',
-            href: 'https://api.hitbtc.com/api/2/public/currency',
+            // search: '?timestamp=1665446579453&recvWindow=10000&signature=eecb0b4919d8320990a7cc39606df0af8c0d8849c39729b15e41d2cfc75bc21d',
+            // query: 'timestamp=1665446579453&recvWindow=10000&signature=eecb0b4919d8320990a7cc39606df0af8c0d8849c39729b15e41d2cfc75bc21d',
+            pathname: '/sapi/v1/capital/config/getall',
+            path: '/sapi/v1/capital/config/getall',
+            href: 'https://api.binance.com/sapi/v1/capital/config/getall',
             method: 'GET',
             headers: {
-                // Accept: ['*/*'],
+                Accept: ['*/*'],
                 'User-Agent': ['node-fetch/1.0 (+https://github.com/bitinn/node-fetch)'],
-                // 'Accept-Encoding': ['gzip,deflate']
-                // accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-                // accept-language: en-US,en;q=0.9,es;q=0.8
-            },
+                'Accept-Encoding': ['gzip,deflate']
+            }
         }
         request(options)
         request(options, done)
