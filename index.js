@@ -43,7 +43,7 @@ class ProxyRotatorAgent extends EventEmitter {
   }
 }
 
-ProxyRotatorAgent.defaultPort = 443;
+ProxyRotatorAgent.prototype.defaultPort = 443;
 
 module.exports = ProxyRotatorAgent;
 

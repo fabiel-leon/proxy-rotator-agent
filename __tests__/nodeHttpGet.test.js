@@ -66,7 +66,8 @@ describe('node:http get', () => {
                 Accept: ['*/*'],
                 'User-Agent': ['node-fetch/1.0 (+https://github.com/bitinn/node-fetch)'],
                 'Accept-Encoding': ['gzip,deflate']
-            }
+            },
+            agent,
         }
         request(options)
         request(options, done)
