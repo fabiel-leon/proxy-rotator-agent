@@ -3,7 +3,7 @@
   "name": "proxy-rotator-agent",
   "license": "Apache-2.0",
   "description": "HTTP proxy rotator tunneling agent",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "repository": {
     "url": "https://github.com/fabiel-leon/proxy-rotator-agent"
   },
