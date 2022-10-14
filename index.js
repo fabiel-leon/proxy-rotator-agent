@@ -21,21 +21,11 @@ class ProxyRotatorAgent extends EventEmitter {
   addRequest(req, options) {
     const self = this;
     const proxyOptions = self.proxies[self.index === self.maxIndex ? self.index = 0 : ++self.index]
-    // console.log(proxyOptions)
-    let tunnelAgentInstance = self.tunnelAgentsMap.get(proxyOptions)
-    if (!tunnelAgentInstance) {
-      // console.log(options)
-      const reqProtocol = options.protocol || options.uri?.protocol || options._defaultAgent?.protocol;
-      const uriProtocol = (reqProtocol === 'https:' ? 'https' : 'http')
-      const proxyProtocol = (proxyOptions.proxy.protocol === 'https:' ? 'Https' : 'Http')
-      const key = `${uriProtocol}Over${proxyProtocol}`
-      // console.log(key, uriProtocol, proxyProtocol, proxyOptions)
-      tunnelAgentInstance = tunnelAgent[key](proxyOptions);
-      self.tunnelAgentsMap.set(proxyOptions, tunnelAgentInstance);
-    }
-    tunnelAgentInstance.on('free', (socket, host, port) => {
-      self.emit('free', socket, host, port);
-    });
+    const reqProtocol = options.protocol || options.uri?.protocol || options._defaultAgent?.protocol;
+    const uriProtocol = (reqProtocol === 'https:' ? 'https' : 'http')
+    const proxyProtocol = (proxyOptions.proxy.protocol === 'https:' ? 'Https' : 'Http')
+    const key = `${uriProtocol}Over${proxyProtocol}`
+    const tunnelAgentInstance = tunnelAgent[key](proxyOptions);
     tunnelAgentInstance.addRequest(req, options);
   }
   removeSocket(socket) {
